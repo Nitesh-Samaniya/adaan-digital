@@ -10,7 +10,7 @@ import { useDisclosure ,DrawerBody,
 } from '@chakra-ui/react'
 import React from 'react'
 import { HamburgerIcon } from '@chakra-ui/icons'
-
+import { Link } from "react-router-dom";
 
 
 const Drawerr = () => {
@@ -35,9 +35,9 @@ const Drawerr = () => {
 
         <DrawerBody bg="#0c111b" color={'#fff'}>
           <Text cursor={'pointer'} fontSize={'2xl'} fontFamily={'cursive'} borderBottom={'1px solid gray'} mb={3}>
-            <Button colorScheme='teal' size='sm' mb={2} mt={1}>Sign In</Button>
+            <Button size='sm' mb={2} mt={1}><Link to={'/login'}>Sign In</Link></Button>
           </Text>
-          <Text cursor={'pointer'} fontSize={'2xl'} fontFamily={'cursive'} borderBottom={'1px solid gray'} mb={3}>Profile</Text>
+          <Text cursor={'pointer'} fontSize={'2xl'} fontFamily={'cursive'} borderBottom={'1px solid gray'} mb={3}><Link to={'/'}>Profile</Link></Text>
           
         </DrawerBody>
 
