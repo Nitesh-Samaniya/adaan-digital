@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Profile = () => {
+    const {isToken} = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     useEffect(()=>{
-        const token = localStorage.getItem('adaanDigitalUserToken') || '';
-        if(!token){
+        if(!isToken){
             navigate('/login')
         }
-    },[navigate])
+    },[navigate, isToken])
 
   return (
     <div style={{

@@ -1,10 +1,13 @@
 import { Box, Button, FormLabel, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 
 const Login = () => {
+    const {setIsToken} = useContext(AuthContext);
     const [show, setShow] = React.useState(false)
     const [formData, setFormData] = useState({
         phone: '',
@@ -66,6 +69,7 @@ const Login = () => {
                 isClosable: true,
             });
             localStorage.setItem('adaanDigitalUserToken', resp?.data?.token)
+            setIsToken(resp?.data?.token)
             if(resp?.data?.token){
                 navigate('/')
             }
@@ -127,7 +131,7 @@ const Login = () => {
             <Box mt={5} mb={5} sx={{display: 'flex', justifyContent:'center'}}>
                 <Button isLoading={loading} type="submit" colorScheme='teal' size='md'>Log In</Button>
             </Box>
-            <Box display='Flex' flexDirection='row-reverse' color={'blue'} fontFamily={'monospace'} fontSize={'larger'}>Create an Account</Box>
+            <Box display='Flex' flexDirection='row-reverse' color={'blue'} fontFamily={'monospace'} fontSize={'larger'}><Link to="/signup">Create an Account</Link></Box>
           </Box>
         </Box>
     </form>
