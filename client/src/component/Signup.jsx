@@ -8,17 +8,21 @@ import { AuthContext } from '../context/AuthContext';
 const SignUp = () => {
     const {setIsToken} = useContext(AuthContext);
     const [show, setShow] = React.useState(false)
+    const [showConfirm, setShowConfirm] = React.useState(false)
     const [formData, setFormData] = useState({
         phone: '',
         email: '',
         name: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     })
     const [loading, setLoading] = useState(false);
     const toast = useToast();
     const navigate = useNavigate();
 
     const handleClick = () => setShow(!show)
+    const handleClickConfirm = () => setShowConfirm(!showConfirm)
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,13 +65,22 @@ const SignUp = () => {
                 duration: 5000,
                 isClosable: true,
             });
-        } else {
+        } else if (formData.password !== formData.confirmPassword) {
+            toast({
+                title: 'Passwords do not match.',
+                description: 'Please ensure both passwords match.',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            });
+        }else {
             await handleSignUp();
             setFormData({
                 phone: '',
                 email: '',
                 name: '',
-                password: ''
+                password: '',
+                confirmPassword: ''
             });
         }
     };
@@ -161,6 +174,24 @@ const SignUp = () => {
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
                             {show ? 'Hide' : 'Show'}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+            </Box>
+
+            <Box marginTop={5}>
+                <FormLabel color={'gray'}>Confirm Password</FormLabel>
+                <InputGroup size='md'>
+                    <Input
+                        pr='4.5rem'
+                        type={showConfirm ? 'text' : 'password'}
+                        placeholder='Confirm password'
+                        name='confirmPassword' onChange={handleChange} value={formData.confirmPassword}
+                        required
+                    />
+                    <InputRightElement width='4.5rem'>
+                        <Button h='1.75rem' size='sm' onClick={handleClickConfirm}>
+                            {showConfirm ? 'Hide' : 'Show'}
                         </Button>
                     </InputRightElement>
                 </InputGroup>
