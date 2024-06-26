@@ -22,8 +22,8 @@ This project is a full stack implementation for an user to onBoard, view and upd
 3. Create a `.env` file in the root directory and add your environment variables:
     ```plaintext
     PORT=8080
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
+    MONGO_URI=mongodb+srv://nitinsamaniya97:4NZeGMnUYHPrg10q@cluster0.uj6dghs.mongodb.net/adaanDigital
+    JWT_SECRET=jwt_secret
     ```
 
 
